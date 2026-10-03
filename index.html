@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>高性价比人生指南 · H5 版</title>
+<meta name="description" content="654 条按性价比排序的人生建议，覆盖长寿防病、急救、省钱理财、法律红线、失业兜底、婚育。支持搜索、筛选、收藏、单条分享。">
+<meta property="og:title" content="高性价比人生指南 · H5 版">
+<meta property="og:description" content="654 条按性价比排序的人生建议。每条写明成本、收益、证据等级和原始出处。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233451b2'/%3E%3Cpath d='M17 33l10 11 20-24' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f6f6f7; --card:#ffffff; --t1:#1f2329; --t2:#5b616b; --t3:#9298a2;
+  --line:#e5e6ea; --brand:#3451b2; --brand-soft:#eef1fb;
+  --green:#18794e; --green-soft:#e6f4ec;
+  --amber:#915930; --amber-soft:#f7efe6;
+  --gray:#5f6368; --gray-soft:#f0f1f3;
+  --red:#b8272c; --red-soft:#fbecec;
+  color-scheme:light dark;
+}
+html.dark{
+  --bg:#131417; --card:#1e2025; --t1:#e8eaed; --t2:#a8adb5; --t3:#6f747d;
+  --line:#2c2f35; --brand:#a8b1ff; --brand-soft:#262a3d;
+  --green:#3dd68c; --green-soft:#1d3329;
+  --amber:#f9b44e; --amber-soft:#3a2f1d;
+  --gray:#a4a8ae; --gray-soft:#2a2c31;
+  --red:#f66f81; --red-soft:#3d2226;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font:15px/1.7 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+a{color:var(--brand)}
+.wrap{max-width:720px;margin:0 auto;padding:0 14px}
+/* header */
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:0.5px solid var(--line);padding:10px 0 8px}
+.hrow{display:flex;align-items:center;gap:10px}
+.logo{display:flex;align-items:center;gap:8px;min-width:0}
+.logo .mark{width:28px;height:28px;border-radius:8px;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+html.dark .logo .mark{color:#131417}
+.logo h1{font-size:16px;margin:0;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.favbtn{margin-left:auto;display:flex;align-items:center;gap:4px;font-size:13px;color:var(--t2);border:0.5px solid var(--line);border-radius:8px;padding:5px 10px;background:var(--card)}
+.favbtn.on{color:var(--amber);border-color:var(--amber)}
+.search{display:flex;align-items:center;gap:8px;background:var(--card);border:0.5px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:10px}
+.search svg{flex-shrink:0;color:var(--t3)}
+.search input{flex:1;border:0;outline:0;background:none;color:var(--t1);font-size:15px;min-width:0}
+.search .clr{color:var(--t3);font-size:13px;padding:2px 4px}
+/* scenes */
+.scenes{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0 4px}
+.scene{background:var(--card);border:0.5px solid var(--line);border-radius:10px;padding:10px 12px;text-align:left}
+.scene b{font-size:14px;font-weight:600;display:block}
+.scene span{font-size:12px;color:var(--t3)}
+.scene.urgent b{color:var(--red)}
+.scene.on{border-color:var(--brand);background:var(--brand-soft)}
+.scene.on b{color:var(--brand)}
+.scene.on span{color:var(--brand);opacity:.75}
+/* filters */
+.filters{display:flex;gap:6px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.chip{flex-shrink:0;font-size:13px;color:var(--t2);border:0.5px solid var(--line);background:var(--card);border-radius:8px;padding:4px 10px}
+.chip.on{color:var(--brand);border-color:var(--brand);background:var(--brand-soft)}
+.chip .x{margin-left:2px}
+.filters select{flex-shrink:0;font-size:13px;color:var(--t2);border:0.5px solid var(--line);background:var(--card);border-radius:8px;padding:4px 6px;max-width:150px}
+.count{font-size:12px;color:var(--t3);margin:6px 0 10px}
+/* list */
+.card{background:var(--card);border:0.5px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;cursor:pointer}
+.card:active{background:var(--brand-soft)}
+.crow{display:flex;align-items:flex-start;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;margin-top:8px;flex-shrink:0}
+.dot.A{background:var(--green)} .dot.B{background:var(--amber)} .dot.C{background:var(--gray)}
+.ctitle{flex:1;font-size:15px;font-weight:600;line-height:1.5;min-width:0}
+.star{color:var(--t3);flex-shrink:0;padding:2px}
+.star.on{color:var(--amber)}
+.cplain{font-size:13px;color:var(--t2);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.b{font-size:11px;border-radius:5px;padding:1px 7px}
+.b.A{color:var(--green);background:var(--green-soft)}
+.b.B{color:var(--amber);background:var(--amber-soft)}
+.b.C{color:var(--gray);background:var(--gray-soft)}
+.b.n{color:var(--t2);background:var(--gray-soft)}
+.csec{font-size:11px;color:var(--t3);margin-top:6px}
+#sentinel{height:1px}
+.empty{text-align:center;color:var(--t3);font-size:14px;padding:48px 0}
+/* modal */
+.mask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:30;display:none}
+.mask.show{display:block}
+.modal{position:fixed;inset:0;z-index:31;display:none;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal.show{display:block}
+.mbox{max-width:720px;margin:0 auto;background:var(--bg);min-height:100%;padding:14px 14px 48px}
+.mtop{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.mtop .back{font-size:14px;color:var(--t2);border:0.5px solid var(--line);background:var(--card);border-radius:8px;padding:5px 12px}
+.mtop .acts{margin-left:auto;display:flex;gap:6px}
+.mtop .acts button{font-size:13px;color:var(--t2);border:0.5px solid var(--line);background:var(--card);border-radius:8px;padding:5px 10px}
+.mtop .acts button.on{color:var(--amber);border-color:var(--amber)}
+.mtitle{font-size:19px;font-weight:600;line-height:1.5;margin:0 0 4px}
+.msec{font-size:12px;color:var(--t3);margin-bottom:10px}
+.mfield{background:var(--card);border:0.5px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:8px}
+.mfield h3{font-size:12px;color:var(--t3);font-weight:400;margin:0 0 4px}
+.mfield p{margin:0;font-size:14px;line-height:1.8;word-break:break-word}
+.mfield p.plain{font-size:15px}
+.mfield p.src{font-size:12px;color:var(--t2);line-height:1.7}
+.mfield .xref{color:var(--brand);border-bottom:1px dashed var(--brand);cursor:pointer}
+.mfield a{word-break:break-all}
+/* footer */
+footer{text-align:center;font-size:12px;color:var(--t3);padding:24px 14px 40px;line-height:1.8}
+footer a{color:var(--t2)}
+/* toast */
+#toast{position:fixed;left:50%;bottom:60px;transform:translateX(-50%);background:var(--t1);color:var(--bg);font-size:13px;border-radius:8px;padding:8px 16px;z-index:50;opacity:0;transition:opacity .25s;pointer-events:none}
+#toast.show{opacity:.95}
+/* 目录抽屉 */
+.tocbtn{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--t2);border:0.5px solid var(--line);border-radius:8px;padding:5px 10px;background:var(--card)}
+.tocmask{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none}
+.tocmask.show{display:block}
+.toc{position:fixed;top:0;left:0;bottom:0;width:300px;max-width:84vw;background:var(--bg);z-index:41;transform:translateX(-102%);transition:transform .25s;overflow-y:auto;border-right:0.5px solid var(--line);padding:16px 12px}
+.toc.show{transform:none}
+.toc h2{font-size:14px;font-weight:600;margin:0 6px 10px}
+.tocitem{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--t1);padding:7px 10px;border-radius:8px;cursor:pointer;text-align:left;width:100%;line-height:1.5}
+.tocitem:hover{background:var(--card)}
+.tocitem.on{background:var(--brand-soft);color:var(--brand)}
+.tocitem .n{color:var(--t3);font-size:11px;margin-left:auto;flex-shrink:0}
+/* 宽屏：目录常驻左侧 */
+@media (min-width:1024px){
+  body{padding-left:272px}
+  .toc{transform:none;width:272px;transition:none}
+  #tocBtn{display:none}
+  .tocmask{display:none!important}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="hrow">
+      <div class="logo">
+        <div class="mark"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5 11-12"/></svg></div>
+        <h1>高性价比人生指南</h1>
+      </div>
+      <button class="tocbtn" id="tocBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>目录</button>
+      <button class="favbtn" id="favBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><span id="favCnt">0</span></button>
+    </div>
+    <div class="search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="搜 654 条建议，如：头盔 退款 落盘" autocomplete="off">
+      <button class="clr" id="clr" hidden>清空</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="home">
+  <div class="scenes" id="scenes"></div>
+  <div class="filters" id="filters"></div>
+  <div class="count" id="count"></div>
+  <div id="list"></div>
+  <div class="empty" id="empty" hidden>没有匹配的条目，换个更短的关键词试试</div>
+  <div id="sentinel"></div>
+</main>
+
+<div class="mask" id="mask"></div>
+<div class="modal" id="modal"><div class="mbox" id="mbox"></div></div>
+
+<div class="tocmask" id="tocmask"></div>
+<nav class="toc" id="toc">
+  <h2>目录 · 34 节</h2>
+  <div id="tocList"></div>
+</nav>
+
+<footer>
+  内容来自<a href="https://github.com/eternity4719/HowToLiveBetter" target="_blank" rel="noopener">「高性价比人生指南」</a>，按 CC BY 4.0 授权转载<br>
+  本站为重排检索版 · 数据同步于 <span id="syncAt"></span> · 条目内容以原仓库为准
+</footer>
+
+<div id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+'use strict';
+let DATA = null;
+const state = {
+  q: '',
+  favOnly: false,
+  sec: 0,
+  sel: { ev: new Set(), money: new Set(), time: new Set(), will: new Set() },
+  favs: new Set(JSON.parse(localStorage.getItem('htlb-favs') || '[]')),
+  rendered: 0,
+};
+
+const $ = s => document.querySelector(s);
+const LABEL = {
+  money: {'0':'不花钱','少':'花钱少','多':'花钱多'},
+  time: {'少':'顺手','中':'几小时','多':'每天占用'},
+  will: {'否':'不用毅力','些':'一点毅力','是':'很费毅力'},
+};
+
+function toast(msg){
+  const t = $('#toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(t._h); t._h = setTimeout(()=>t.classList.remove('show'), 1600);
+}
+
+function saveFavs(){ localStorage.setItem('htlb-favs', JSON.stringify([...state.favs])); $('#favCnt').textContent = state.favs.size; }
+
+function esc(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* 交叉引用「第 X 节第 Y 条」转成可点的链接；URL 转成 <a> */
+function decorate(text){
+  let h = esc(text);
+  h = h.replace(/第\s*(\d+)\s*节第\s*(\d+)\s*条/g, (m,a,b)=>`<span class="xref" data-id="${a}-${b}">${m}</span>`);
+  h = h.replace(/(https?:\/\/[^\s<）)；;，。]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  return h;
+}
+
+function matchEntry(e, q){
+  if(!q) return true;
+  const hay = e.title + '\n' + e.plain + '\n' + e.benefit + '\n' + e.note + '\n' + e.cost;
+  return q.split(/\s+/).every(t => hay.includes(t));
+}
+
+function filtered(){
+  const s = state.sel;
+  return DATA.entries.filter(e => {
+    if(state.favOnly && !state.favs.has(e.id)) return false;
+    if(state._sceneSecs && !state._sceneSecs.has(e.sec)) return false;
+    if(state.sec && e.sec !== state.sec) return false;
+    if(s.ev.size && !s.ev.has(e.ev)) return false;
+    if(s.money.size && !s.money.has(e.money)) return false;
+    if(s.time.size && !s.time.has(e.time)) return false;
+    if(s.will.size && !s.will.has(e.will)) return false;
+    return matchEntry(e, state.q);
+  });
+}
+
+/* ---------- 渲染 ---------- */
+
+function renderScenes(){
+  const scenes = [
+    {t:'有人倒地（急救）', d:'黄金 4 分钟', secs:[13], urgent:true},
+    {t:'被裁了', d:'先做这几件事', secs:[19]},
+    {t:'孩子出生前后', d:'要办的事清单', secs:[20,27,30]},
+    {t:'刚确诊慢性病', d:'接下来怎么办', secs:[16,24]},
+    {t:'家里有老人', d:'防跌倒 用药 就医', secs:[17]},
+    {t:'被骗了 / 被威胁', d:'止付 留证 报警', secs:[8,14]},
+  ];
+  $('#scenes').innerHTML = scenes.map((s,i)=>
+    `<button class="scene${s.urgent?' urgent':''}" data-i="${i}" data-secs="${s.secs.join(',')}"><b>${s.t}</b><span>${s.d}</span></button>`).join('');
+  $('#scenes').addEventListener('click', ev=>{
+    const b = ev.target.closest('.scene'); if(!b) return;
+    const i = Number(b.dataset.i);
+    const secs = b.dataset.secs.split(',').map(Number);
+    const same = state._sceneIdx === i;   // 再点一次同一个场景 = 取消
+    setScene(same ? null : i);
+    state.sec = 0; state._sceneSecs = null;
+    const sel = $('#secSel'); if(sel) sel.value = '0';
+    if(!same) state._sceneSecs = new Set(secs);
+    rerender(); window.scrollTo({top:0});
+  });
+}
+
+/* 场景卡选中态：互斥，同一时刻只有一个 */
+function setScene(idx){
+  state._sceneIdx = idx;
+  document.querySelectorAll('.scene').forEach((el,i)=>el.classList.toggle('on', i===idx));
+}
+
+function renderFilters(){
+  const tv = DATA.tagValues;
+  const groups = [
+    {key:'ev', label:'证据', items: tv.ev, fmt: v=>`证据 ${v}`},
+    {key:'money', label:'钱', items: tv.money, fmt: v=>LABEL.money[v]||v},
+    {key:'time', label:'时间', items: tv.time, fmt: v=>LABEL.time[v]||v},
+    {key:'will', label:'毅力', items: tv.will, fmt: v=>LABEL.will[v]||v},
+  ];
+  let h = `<select id="secSel"><option value="0">全部章节</option>` +
+    DATA.chapters.map(c=>`<option value="${c.n}">${c.n}. ${esc(c.title)}</option>`).join('') + `</select>`;
+  for(const g of groups){
+    for(const v of g.items){
+      const on = state.sel[g.key].has(v);
+      h += `<button class="chip${on?' on':''}" data-g="${g.key}" data-v="${esc(v)}">${g.fmt(v)}${on?' <span class="x">✕</span>':''}</button>`;
+    }
+  }
+  $('#filters').innerHTML = h;
+  $('#secSel').onchange = ev=>{ state.sec = Number(ev.target.value); state._sceneSecs = null; setScene(null); rerender(); };
+  $('#filters').onclick = ev=>{
+    const c = ev.target.closest('.chip'); if(!c) return;
+    const g = c.dataset.g, v = c.dataset.v;
+    state.sel[g].has(v) ? state.sel[g].delete(v) : state.sel[g].add(v);
+    renderFilters(); rerender();
+  };
+}
+
+function cardHTML(e){
+  const fav = state.favs.has(e.id);
+  const ch = DATA.chapters[e.sec-1];
+  const tags = [`<span class="b ${e.ev}">证据 ${e.ev}</span>`];
+  if(e.money) tags.push(`<span class="b n">${LABEL.money[e.money]||('钱='+e.money)}</span>`);
+  if(e.time) tags.push(`<span class="b n">${LABEL.time[e.time]||('时间='+e.time)}</span>`);
+  if(e.will && e.will!=='否') tags.push(`<span class="b n">${LABEL.will[e.will]||'要毅力'}</span>`);
+  if(e.gain) tags.push(`<span class="b n">收益 ${e.gain}</span>`);
+  return `<div class="card" data-id="${e.id}">
+    <div class="crow"><span class="dot ${e.ev}"></span>
+      <div class="ctitle">${esc(e.title)}</div>
+      <button class="star${fav?' on':''}" data-fav="${e.id}" aria-label="收藏">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="${fav?'currentColor':'none'}" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>
+      </button></div>
+    <div class="cplain">${esc(e.plain)}</div>
+    <div class="cmeta">${tags.join('')}</div>
+    <div class="csec">第 ${e.sec} 节 · ${esc(ch?ch.title:'')}</div>
+  </div>`;
+}
+
+const PAGE = 60;
+function renderList(reset){
+  const list = $('#list');
+  if(reset){ state.rendered = 0; list.innerHTML = ''; }
+  const items = filtered();
+  const end = Math.min(state.rendered + PAGE, items.length);
+  let h = '';
+  for(let i = state.rendered; i < end; i++) h += cardHTML(items[i]);
+  list.insertAdjacentHTML('beforeend', h);
+  state.rendered = end;
+  const cnt = $('#count');
+  if(state.favOnly) cnt.textContent = `收藏 ${items.length} 条`;
+  else cnt.textContent = `显示 ${items.length} / ${DATA.entries.length} 条` + (state.q?` · 关键词「${state.q}」`:'');
+  $('#empty').hidden = items.length !== 0;
+}
+
+function rerender(){ renderToc(); renderList(true); }
+
+/* ---------- 目录抽屉 ---------- */
+
+function renderToc(){
+  const counts = {};
+  DATA.entries.forEach(e=>counts[e.sec]=(counts[e.sec]||0)+1);
+  const active = !state.sec && !state._sceneSecs;
+  let h = `<button class="tocitem${active?' on':''}" data-sec="0">全部章节<span class="n">${DATA.entries.length}</span></button>`;
+  h += DATA.chapters.map(c=>
+    `<button class="tocitem${state.sec===c.n?' on':''}" data-sec="${c.n}">${c.n}. ${esc(c.title)}<span class="n">${counts[c.n]||0}</span></button>`).join('');
+  $('#tocList').innerHTML = h;
+}
+
+function openToc(){ renderToc(); $('#toc').classList.add('show'); $('#tocmask').classList.add('show'); }
+function closeToc(){ $('#toc').classList.remove('show'); $('#tocmask').classList.remove('show'); }
+
+/* ---------- 收藏 ---------- */
+
+function toggleFav(id){
+  state.favs.has(id) ? state.favs.delete(id) : state.favs.add(id);
+  saveFavs();
+  document.querySelectorAll(`[data-fav="${id}"]`).forEach(b=>{
+    b.classList.toggle('on', state.favs.has(id));
+    const svg = b.querySelector('svg');
+    if(svg) svg.setAttribute('fill', state.favs.has(id)?'currentColor':'none');
+  });
+  toast(state.favs.has(id) ? '已收藏' : '已取消收藏');
+  if(state.favOnly) rerender();
+}
+
+/* ---------- 详情弹窗 ---------- */
+
+function entryById(id){ return DATA.entries.find(e=>e.id===id); }
+
+function fieldHTML(title, body, cls){
+  if(!body) return '';
+  return `<div class="mfield"><h3>${title}</h3><p class="${cls||''}">${decorate(body)}</p></div>`;
+}
+
+function openModal(id, push){
+  const e = entryById(id);
+  if(!e) return;
+  const ch = DATA.chapters[e.sec-1];
+  const fav = state.favs.has(e.id);
+  const tags = [`<span class="b ${e.ev}">证据 ${e.ev} 级</span>`];
+  if(e.money) tags.push(`<span class="b n">${LABEL.money[e.money]||e.money}</span>`);
+  if(e.time) tags.push(`<span class="b n">${LABEL.time[e.time]||e.time}</span>`);
+  if(e.will) tags.push(`<span class="b n">${LABEL.will[e.will]||e.will}</span>`);
+  if(e.gain) tags.push(`<span class="b n">收益 ${e.gain}</span>`);
+  if(e.scope) tags.push(`<span class="b n">口径：${esc(e.scope)}</span>`);
+  $('#mbox').innerHTML = `
+    <div class="mtop">
+      <button class="back" id="mback">‹ 返回</button>
+      <div class="acts">
+        <button id="mshare">分享卡片</button>
+        <button id="mlink">复制链接</button>
+        <button id="mfav" class="${fav?'on':''}">${fav?'已收藏':'收藏'}</button>
+        <button id="mclose" aria-label="关闭" style="font-size:15px;line-height:1">✕</button>
+      </div>
+    </div>
+    <h2 class="mtitle">${esc(e.title)}</h2>
+    <div class="msec">第 ${e.sec} 节 · ${esc(ch?ch.title:'')} · 第 ${e.no} 条</div>
+    <div class="cmeta" style="margin-bottom:12px">${tags.join('')}</div>
+    ${fieldHTML('说人话', e.plain, 'plain')}
+    ${fieldHTML('成本', e.cost)}
+    ${fieldHTML('收益（原始出处口径）', e.benefit)}
+    ${fieldHTML('证据来源', e.src, 'src')}
+    ${fieldHTML('备注', e.note)}
+    <div style="font-size:11px;color:var(--t3);margin-top:4px">内容按 CC BY 4.0 转载自原仓库，条目编号与原书一致，引用请以原文为准</div>`;
+  $('#mask').classList.add('show');
+  $('#modal').classList.add('show');
+  $('#modal').scrollTop = 0; document.body.style.overflow = 'hidden';
+  $('#mback').onclick = closeModal;
+  $('#mclose').onclick = closeModal;
+  $('#mfav').onclick = ()=>{ toggleFav(id); const on = state.favs.has(id);
+    $('#mfav').classList.toggle('on', on); $('#mfav').textContent = on?'已收藏':'收藏'; };
+  $('#mlink').onclick = ()=>copyLink(id);
+  $('#mshare').onclick = ()=>makeCard(e);
+  if(push) history.replaceState(null, '', `#/e/${id}`);
+  state._openId = id;
+}
+
+function closeModal(){
+  $('#mask').classList.remove('show');
+  $('#modal').classList.remove('show');
+  document.body.style.overflow = '';
+  state._openId = null;
+  if(location.hash.startsWith('#/e/')) history.replaceState(null, '', location.pathname);
+}
+
+function copyLink(id){
+  const url = location.origin + location.pathname + `#/e/${id}`;
+  (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject())
+    .then(()=>toast('链接已复制')).catch(()=>{
+      const ta = document.createElement('textarea'); ta.value = url;
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+      ta.remove(); toast('链接已复制');
+    });
+}
+
+/* ---------- 分享卡片（canvas 生成 3:4 竖图） ---------- */
+
+function wrapText(ctx, text, x, y, maxW, lh, maxLines){
+  const lines = [];
+  let line = '';
+  for(const ch of text){
+    if(ctx.measureText(line + ch).width > maxW || ch === '\n'){ lines.push(line); line = ch==='\n'?'':ch;
+      if(lines.length >= maxLines) break;
+    } else line += ch;
+  }
+  if(lines.length < maxLines && line) lines.push(line);
+  if(lines.length === maxLines && (line || text.length > lines.join('').length)) lines[maxLines-1] += '…';
+  ctx.textAlign = 'left';
+  lines.forEach((l,i)=>ctx.fillText(l, x, y + i*lh));
+  return y + lines.length*lh;
+}
+
+function makeCard(e){
+  const W = 750, H = 1000;
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const ctx = cv.getContext('2d');
+  const dark = document.documentElement.classList.contains('dark');
+  const bg = dark ? '#1e2025' : '#ffffff', fg = dark ? '#e8eaed' : '#1f2329',
+        sub = dark ? '#a8adb5' : '#5b616b', line = dark ? '#2c2f35' : '#e5e6ea';
+  const evColor = e.ev==='A' ? (dark?'#3dd68c':'#18794e') : e.ev==='B' ? (dark?'#f9b44e':'#915930') : (dark?'#a4a8ae':'#5f6368');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = evColor; ctx.fillRect(0,0,W,8);
+  ctx.fillStyle = sub; ctx.font = '26px sans-serif';
+  ctx.fillText(`高性价比人生指南 · 第 ${e.sec} 节第 ${e.no} 条`, 48, 78);
+  ctx.fillStyle = fg; ctx.font = '600 42px sans-serif';
+  let y = wrapText(ctx, e.title, 48, 150, W-96, 60, 3) + 36;
+  ctx.font = '26px sans-serif';
+  const badge = `证据 ${e.ev} 级${e.money?` · ${LABEL.money[e.money]||''}`:''}${e.gain?` · 收益 ${e.gain}`:''}`;
+  ctx.fillStyle = bg; ctx.font = '26px sans-serif';
+  const bw = ctx.measureText(badge).width + 36;
+  ctx.fillStyle = evColor + ''; ctx.globalAlpha = 0.14;
+  ctx.fillRect(48, y-32, bw, 44); ctx.globalAlpha = 1;
+  ctx.fillStyle = evColor; ctx.fillText(badge, 66, y);
+  y += 56;
+  ctx.fillStyle = fg; ctx.font = '30px sans-serif';
+  y = wrapText(ctx, e.plain, 48, y, W-96, 52, 9) + 24;
+  ctx.strokeStyle = line; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(48, H-130); ctx.lineTo(W-48, H-130); ctx.stroke();
+  ctx.fillStyle = sub; ctx.font = '22px sans-serif';
+  ctx.fillText('内容 CC BY 4.0 转载自「高性价比人生指南」', 48, H-92);
+  ctx.fillText('github.com/eternity4719/HowToLiveBetter', 48, H-56);
+  cv.toBlob(async blob=>{
+    const file = new File([blob], `guide-${e.id}.png`, {type:'image/png'});
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({files:[file], title: e.title}); return; }catch(_){}
+    }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = `guide-${e.id}.png`; a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 5000);
+    toast('卡片已生成，开始下载');
+  }, 'image/png');
+}
+
+/* ---------- 事件 ---------- */
+
+function route(){
+  const m = location.hash.match(/^#\/e\/(\d+-\d+)$/);
+  if(m) openModal(m[1], false);
+}
+
+function init(){
+  const mq = matchMedia('(prefers-color-scheme: dark)');
+  const applyDark = ()=>document.documentElement.classList.toggle('dark', mq.matches);
+  applyDark(); mq.addEventListener('change', applyDark);
+  $('#syncAt').textContent = DATA.syncedAt;
+  $('#favCnt').textContent = state.favs.size;
+  renderScenes(); renderFilters(); rerender();
+
+  $('#q').addEventListener('input', ev=>{
+    state.q = ev.target.value.trim();
+    $('#clr').hidden = !state.q;
+    rerender();
+  });
+  $('#clr').addEventListener('click', ()=>{ state.q=''; $('#q').value=''; $('#clr').hidden = true; rerender(); });
+
+  $('#favBtn').addEventListener('click', ()=>{
+    state.favOnly = !state.favOnly;
+    $('#favBtn').classList.toggle('on', state.favOnly);
+    rerender(); window.scrollTo({top:0});
+  });
+
+  $('#tocBtn').addEventListener('click', openToc);
+  $('#tocmask').addEventListener('click', closeToc);
+  $('#tocList').addEventListener('click', ev=>{
+    const it = ev.target.closest('.tocitem'); if(!it) return;
+    state.sec = Number(it.dataset.sec);
+    state._sceneSecs = null;
+    setScene(null);
+    const sel = $('#secSel'); if(sel) sel.value = String(state.sec);
+    closeToc(); rerender(); window.scrollTo({top:0});
+  });
+
+  // 列表点按：收藏星 / 进详情
+  $('#list').addEventListener('click', ev=>{
+    const star = ev.target.closest('[data-fav]');
+    if(star){ toggleFav(star.dataset.fav); return; }
+    const card = ev.target.closest('.card');
+    if(card) openModal(card.dataset.id, true);
+  });
+
+  $('#mask').addEventListener('click', closeModal);
+  document.addEventListener('keydown', ev=>{ if(ev.key==='Escape'){ closeModal(); closeToc(); } });
+
+  // 弹窗内交叉引用跳转
+  $('#mbox').addEventListener('click', ev=>{
+    const x = ev.target.closest('.xref');
+    if(x) openModal(x.dataset.id, true);
+  });
+
+  // 无限滚动
+  new IntersectionObserver(entries=>{
+    if(entries[0].isIntersecting && state.rendered < filtered().length) renderList(false);
+  }, {rootMargin: '600px'}).observe($('#sentinel'));
+
+  window.addEventListener('hashchange', route);
+  route();
+}
+
+// 数据优先用 data.js 注入的全局变量（file:// 双击直开也能用），没有再 fetch
+if (window.__DATA__) { DATA = window.__DATA__; init(); }
+else fetch('./data.json').then(r=>{
+  if(!r.ok) throw new Error(r.status);
+  return r.json();
+}).then(d=>{ DATA = d; init(); }).catch(err=>{
+  document.body.innerHTML = '<div style="padding:48px 24px;text-align:center;color:#888">数据加载失败：请确认 data.js 与 index.html 在同一目录。<br>' + err.message + '</div>';
+});
+</script>
+</body>
+</html>
