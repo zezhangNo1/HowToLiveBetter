@@ -8,6 +8,7 @@
 <meta property="og:title" content="高性价比人生指南 · H5 版">
 <meta property="og:description" content="654 条按性价比排序的人生建议。每条写明成本、收益、证据等级和原始出处。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233451b2'/%3E%3Cpath d='M17 33l10 11 20-24' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script defer src="https://events.vercount.one/js"></script>
 <style>
 :root{
   --bg:#f6f6f7; --card:#ffffff; --t1:#1f2329; --t2:#5b616b; --t3:#9298a2;
@@ -104,6 +105,14 @@ html.dark .logo .mark{color:#131417}
 /* footer */
 footer{text-align:center;font-size:12px;color:var(--t3);padding:24px 14px 40px;line-height:1.8}
 footer a{color:var(--t2)}
+/* 访问统计：顶栏行内胶囊（红框位），窄屏只留 PV */
+#visit{display:flex;align-items:center;font-size:12px;color:var(--t3);background:var(--card);border:0.5px solid var(--line);border-radius:999px;padding:5px 12px;white-space:nowrap;flex-shrink:0}
+#visit b{color:var(--t2);font-weight:600;margin:0 2px}
+#visit .sep{margin:0 6px;opacity:.6}
+@media (max-width:640px){
+  #visit .w1,#visit .m2{display:none}
+  #visit{padding:5px 10px}
+}
 /* toast */
 #toast{position:fixed;left:50%;bottom:60px;transform:translateX(-50%);background:var(--t1);color:var(--bg);font-size:13px;border-radius:8px;padding:8px 16px;z-index:50;opacity:0;transition:opacity .25s;pointer-events:none}
 #toast.show{opacity:.95}
@@ -145,6 +154,7 @@ footer a{color:var(--t2)}
         <h1>高性价比人生指南</h1>
       </div>
       <button class="tocbtn" id="tocBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>目录</button>
+      <div id="visit"><span class="w1" id="vL1">本站已有</span><b id="vercount_value_site_pv">--</b><span id="vL2">次访问</span><span class="m2"><span class="sep">·</span><b id="vercount_value_site_uv">--</b><span class="w3" id="vL3">位访客</span></span></div>
       <button class="favbtn" id="favBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><span id="favCnt">0</span></button>
       <div class="tools">
         <button class="iconbtn" id="themeBtn" aria-label="theme"></button>
@@ -224,6 +234,7 @@ const I18N = {
     footL1: '内容来自<a href="https://github.com/eternity4719/HowToLiveBetter" target="_blank" rel="noopener">「高性价比人生指南」</a>，按 CC BY 4.0 授权转载',
     footL2: '本站为重排检索版 · 数据同步于 ',
     footL3: ' · 条目内容以原仓库为准',
+    vL1: '本站已有', vL2: '次访问', vL3: '位访客',
   },
   en: {
     appTitle: 'Cost-Effective Life Guide',
@@ -244,6 +255,7 @@ const I18N = {
     footL1: 'Content from <a href="https://github.com/eternity4719/HowToLiveBetter" target="_blank" rel="noopener">HowToLiveBetter</a>, reproduced under CC BY 4.0',
     footL2: 'Re-arranged search edition · data synced ',
     footL3: ' · entries remain in Chinese',
+    vL1: '', vL2: 'visits', vL3: 'visitors',
   },
 };
 function t(k){ return (I18N[LANG] && I18N[LANG][k]) || I18N.zh[k] || k; }
@@ -573,6 +585,9 @@ function applyI18n(){
   $('#tocTitle').textContent = t('tocTitle');
   $('#adCard').innerHTML = t('adText');
   $('#foot').innerHTML = `${t('footL1')}<br>${t('footL2')}${DATA.syncedAt}${t('footL3')}`;
+  $('#vL1').textContent = t('vL1');
+  $('#vL2').textContent = t('vL2');
+  $('#vL3').textContent = t('vL3');
   renderScenes(); renderFilters(); renderToc();
   if(state._openId) openModal(state._openId, false);
 }
